@@ -8,21 +8,19 @@ div.className = 'total-price';
 div.innerText = 'Total:';
 // calcula valor total: 
 const CalculatePrice = (callback) => {
- const products = carOl.childNodes;
+ const products = document.querySelectorAll('.div_price');
  let total = 0;
  products.forEach((product) => {
-   const startIndex = (product.innerText.indexOf('$') + 1);
-   const priceString = product.innerText.substring(startIndex);
+   const priceString = product.innerText.substring(3);
    const priceNumber = parseFloat(priceString);
-   if (Number.isNaN(priceNumber) === false) {
+   console.log(priceNumber);
      total = callback(total, priceNumber);
-   }
  });
- div.innerText = total;
+ div.innerText = `Total: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
 };
 // calback da função calculate price
 const changeTotal = (a, b) => {
-   result = a + b;
+   const result = a + b;
    return result;
 };
 // função que SALVA itens no carrinho 
@@ -31,7 +29,9 @@ const changeTotal = (a, b) => {
 // };
 // função que REMOVE itens do carrinho
 function cartItemClickListener(event) {
-  carOl.removeChild(event.target);
+  const father = event.target.parentElement
+  carOl.removeChild(father);
+  console.log(father);
   CalculatePrice(changeTotal);
   saveCartItems(carOl.innerHTML);
   // localStorageCart();
@@ -72,17 +72,28 @@ function createProductItemElement({ sku, name, image }) {
 // function getSkuFromProductItem(item) {
 //   return item.querySelector('span.item__sku').innerText;
 // }
-function createCartItemElement({ sku, name, salePrice }) {
-  const li = document.createElement('li');
+function createCartItemElement({ sku, name, salePrice, image }) {
+  const div = document.createElement('div');
   const button = document.createElement('button');
+  const divPrice = document.createElement('div');
+  const cartImage = document.createElement('img')
+  const divName = document.createElement('div');
+  divName.className = 'div-name'
   button.className = 'cart_button';
-  button.innerText = 'remover';
+  div.className = 'cart__item';
+  divPrice.className = 'div_price';
+  cartImage.className = 'cart_image';
+  button.innerText = 'x';
+  divPrice.innerText = `R$:${salePrice}`;
+  divName.innerText = name;
+  cartImage.src = image;
   button.addEventListener('click', cartItemClickListener);
-  li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  li.addEventListener('click', cartItemClickListener);
-  // li.appendChild(button);
-  return li;
+  // div.addEventListener('click', cartItemClickListener);
+  divName.appendChild(divPrice);
+  div.appendChild(button);
+  div.appendChild(cartImage);
+  div.appendChild(divName);
+  return div;
 }
 // adicinar texto  CARREGANDO 
 const putLoadSpace = () => {
