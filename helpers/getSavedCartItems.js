@@ -1,10 +1,11 @@
-const getSavedCartItems = (fatherNode) => {
-  if (!fatherNode.firstChild) {
-    const father = fatherNode;
-    father.innerHTML = localStorage.getItem('cartItems');
-    // const childrensCart = document.querySelectorAll('.cart__item');
-    // childrensCart.forEach((kid) => kid.addEventListener('click', ChildEvent));
+const getSavedCartItems = (local, item) => {
+  if (local === 'cartItems') {
+    const father = item;
+    father.innerHTML = localStorage.getItem(local);
     }
+  if(local === 'total') {
+    item.innerText = localStorage.getItem(local);
+  };
 };
 
 if (typeof module !== 'undefined') {

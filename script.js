@@ -31,7 +31,8 @@ function cartItemClickListener(event) {
   const father = event.target.parentElement
   carOl.removeChild(father);
   CalculatePrice(changeTotal);
-  saveCartItems(carOl.innerHTML);
+  saveCartItems('cartItems', carOl.innerHTML);
+  saveCartItems('total', document.querySelector('.total-price').innerText);
   // localStorageCart();
 }
 // // função que RECUPERA itens do carrinho
@@ -112,7 +113,8 @@ const addEventButtonItem = (async (event) => {
   const item = await (fetchItem(id));
   carOl.appendChild(createCartItemElement(item));
   CalculatePrice(changeTotal);
-  saveCartItems(carOl.innerHTML);
+  saveCartItems('cartItems', carOl.innerHTML);
+  saveCartItems('total', document.querySelector('.total-price').innerText);
   // localStorageCart();
 });
 // função que adiciona itens no container de class .items e adiciona escutador no botão de cada produto. 
@@ -140,12 +142,14 @@ filhos.forEach((filho) => {
   carOl.removeChild(filho);
 });
   CalculatePrice(changeTotal);
-  saveCartItems(carOl.innerHTML);
+  saveCartItems('cartItems', carOl.innerHTML);
+  saveCartItems('total', document.querySelector('.total-price').innerText);
 };
 eraseButton.addEventListener('click', eraseCart);
 window.onload = () => { 
   forEachProduct();
-  getSavedCartItems(carOl);
+  getSavedCartItems('cartItems', carOl);
+  getSavedCartItems('total', document.querySelector('.total-price'));
   const childrensCart = document.querySelectorAll('.cart__item');
     childrensCart.forEach((kid) => kid.addEventListener('click', cartItemClickListener));
   // getLocalStorage();
