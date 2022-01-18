@@ -13,7 +13,6 @@ const CalculatePrice = (callback) => {
  products.forEach((product) => {
    const priceString = product.innerText.substring(3);
    const priceNumber = parseFloat(priceString);
-   console.log(priceNumber);
      total = callback(total, priceNumber);
  });
  div.innerText = `Total: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
@@ -31,7 +30,6 @@ const changeTotal = (a, b) => {
 function cartItemClickListener(event) {
   const father = event.target.parentElement
   carOl.removeChild(father);
-  console.log(father);
   CalculatePrice(changeTotal);
   saveCartItems(carOl.innerHTML);
   // localStorageCart();
