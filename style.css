@@ -152,7 +152,6 @@ body {
   display: flex;
   margin-top: 5px;
   background-color: rgba(224, 227, 231, 0.623);
-
 }
 
 .cart_image{
@@ -178,6 +177,7 @@ body {
   order: 1;
   font-size: 15px;
   margin: 1px;
+  flex-grow: 1;
 }
 
 .total-price{
