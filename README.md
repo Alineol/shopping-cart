@@ -10,6 +10,8 @@ Implementar testes unitários.
 
 <img src="https://github.com/Alineol/shopping-cart/blob/main/prototipo.gif" width="400"/>
 
+**Link do site:** https://alineol.github.io/shopping-cart/
+
 ### Requisitos obrigatórios:
 
 1. Crie uma listagem de produtos
