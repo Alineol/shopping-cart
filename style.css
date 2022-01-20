@@ -148,20 +148,20 @@ body {
   background-color: rgb(249, 249, 246);
 }
 
-.cart__item{
+.cart__item {
   display: flex;
   margin-top: 5px;
   background-color: rgba(224, 227, 231, 0.623);
 }
 
-.cart_image{
+.cart_image {
  width: 40px; 
  border-radius: 100%;
  align-self: flex-start;
 
 }
 
-.cart_button{
+.cart_button {
   order: 2;
   align-self: flex-start;
 }
@@ -173,14 +173,27 @@ body {
   margin: 1px;
 }
 
-.div-name{
+.div-name {
   order: 1;
   font-size: 15px;
   margin: 1px;
   flex-grow: 1;
 }
 
-.total-price{
+.total-price {
   align-self: center;
   margin: 10px;
+}
+.input-section {
+max-width:68.5%;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 5px;
+
+}
+
+.input-label {
+  border: 1px solid;
+  padding: 5px;
 }
