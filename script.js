@@ -7,20 +7,15 @@ const div = cartSection.appendChild((document.createElement('div')));
 div.className = 'total-price';
 div.innerText = 'Total:';
 // calcula valor total: 
-const CalculatePrice = (callback) => {
+const CalculatePrice = () => {
  const products = document.querySelectorAll('.div_price');
  let total = 0;
  products.forEach((product) => {
    const priceString = product.innerText.substring(3);
    const priceNumber = parseFloat(priceString);
-     total = callback(total, priceNumber);
+     total += priceNumber;
  });
  div.innerText = `Total: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
-};
-// calback da função calculate price
-const changeTotal = (a, b) => {
-   const result = a + b;
-   return result;
 };
 // função que SALVA itens no carrinho 
 // const localStorageCart = () => {
@@ -30,7 +25,7 @@ const changeTotal = (a, b) => {
 function cartItemClickListener(event) {
   const father = event.target.parentElement
   carOl.removeChild(father);
-  CalculatePrice(changeTotal);
+  CalculatePrice();
   saveCartItems('cartItems', carOl.innerHTML);
   saveCartItems('total', document.querySelector('.total-price').innerText);
   // localStorageCart();
@@ -112,7 +107,7 @@ const addEventButtonItem = (async (event) => {
   const id = (pai.firstChild).innerText;
   const item = await (fetchItem(id));
   carOl.appendChild(createCartItemElement(item));
-  CalculatePrice(changeTotal);
+  CalculatePrice();
   saveCartItems('cartItems', carOl.innerHTML);
   saveCartItems('total', document.querySelector('.total-price').innerText);
   // localStorageCart();
@@ -141,7 +136,7 @@ const filhos = document.querySelectorAll('.cart__item');
 filhos.forEach((filho) => {
   carOl.removeChild(filho);
 });
-  CalculatePrice(changeTotal);
+  CalculatePrice();
   saveCartItems('cartItems', carOl.innerHTML);
   saveCartItems('total', document.querySelector('.total-price').innerText);
 };
