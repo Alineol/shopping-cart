@@ -2,10 +2,7 @@ const carOl = document.querySelector('.cart__items');
 const cartSection = document.querySelector('.cart');
 const eraseButton = document.querySelector('.empty-cart');
 const itemsCont = document.querySelector('.items');
-// adicionar valor TOTAL do carrinho 
-const div = cartSection.appendChild((document.createElement('div')));
-div.className = 'total-price';
-div.innerText = 'Total:';
+const divPrice = document.querySelector('.total-price');
 // calcula valor total: 
 const CalculatePrice = () => {
  const products = document.querySelectorAll('.div_price');
@@ -15,12 +12,8 @@ const CalculatePrice = () => {
    const priceNumber = parseFloat(priceString);
      total += priceNumber;
  });
- div.innerText = `Total: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+ divPrice.innerText = `Total: ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
 };
-// função que SALVA itens no carrinho 
-// const localStorageCart = () => {
-// localStorage.setItem('carItems', carOl.innerHTML);
-// };
 // função que REMOVE itens do carrinho
 function cartItemClickListener(event) {
   const father = event.target.parentElement
@@ -30,14 +23,7 @@ function cartItemClickListener(event) {
   saveCartItems('total', document.querySelector('.total-price').innerText);
   // localStorageCart();
 }
-// // função que RECUPERA itens do carrinho
-// const getLocalStorage = () => {
-//   if (!carOl.firstChild) {
-//   carOl.innerHTML = localStorage.getItem('carItems');
-//   const childrensCart = document.querySelectorAll('.cart__item');
-//   childrensCart.forEach((kid) => kid.addEventListener('click', cartItemClickListener));
-//   }
-// };
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -62,10 +48,6 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
   return section;
 }
-
-// function getSkuFromProductItem(item) {
-//   return item.querySelector('span.item__sku').innerText;
-// }
 function createCartItemElement({ sku, name, salePrice, image }) {
   const div = document.createElement('div');
   const button = document.createElement('button');
