@@ -1,8 +1,9 @@
 const carOl = document.querySelector('.cart__items');
 const cartSection = document.querySelector('.cart');
-const eraseButton = document.querySelector('.empty-cart');
+const clearCart = document.querySelector('.empty-cart');
 const itemsCont = document.querySelector('.items');
 const divPrice = document.querySelector('.total-price');
+const searchButton = document.querySelector('.search-button');
 // calcula valor total: 
 const CalculatePrice = () => {
  const products = document.querySelectorAll('.div_price');
@@ -84,22 +85,20 @@ const putLoadSpace = () => {
   };
 // função com AÇÃO do botão de cada PRODUTO| ADICIONA produto no carrinho 
 const addEventButtonItem = (async (event) => {
-  const button = event.target;
-  const pai = button.parentElement;
-  const id = (pai.firstChild).innerText;
-  const item = await (fetchItem(id));
-  carOl.appendChild(createCartItemElement(item));
+  const itemSection = event.target.parentElement;
+  const id = (itemSection.firstChild).innerText;
+  const productSelected = await (fetchItem(id));
+  carOl.appendChild(createCartItemElement(productSelected));
   CalculatePrice();
   saveCartItems('cartItems', carOl.innerHTML);
   saveCartItems('total', document.querySelector('.total-price').innerText);
-  // localStorageCart();
 });
 // função que adiciona itens no container de class .items e adiciona escutador no botão de cada produto. 
-const forEachProduct = (async () => {
+const forEachProduct = (async (search) => {
   putLoadSpace();
-  const objPrdcts = await fetchProducts('computador');
+  const products = await fetchProducts(search);
   await removeLoad();
-  objPrdcts.map((product) => {
+  products.map((product) => {
     const { id: sku, title: name, thumbnail: image } = product;
     const object = {
       sku,
@@ -114,20 +113,26 @@ const forEachProduct = (async () => {
 });
 // função do botão ESVAZIAR carrinho
 const eraseCart = () => {
-const filhos = document.querySelectorAll('.cart__item');
-filhos.forEach((filho) => {
+const productsInCart = document.querySelectorAll('.cart__item');
+productsInCart.forEach((filho) => {
   carOl.removeChild(filho);
 });
   CalculatePrice();
   saveCartItems('cartItems', carOl.innerHTML);
   saveCartItems('total', document.querySelector('.total-price').innerText);
 };
-eraseButton.addEventListener('click', eraseCart);
+clearCart.addEventListener('click', eraseCart);
+const searchEvent = () => {
+const searchInput = document.querySelector('#input-search').value;
+const productInItems = document.querySelectorAll('.item');
+productInItems.forEach((item) => item.remove());
+forEachProduct(searchInput);
+};
+searchButton.addEventListener('click', searchEvent);
 window.onload = () => { 
-  forEachProduct();
+  forEachProduct('computador');
   getSavedCartItems('cartItems', carOl);
   getSavedCartItems('total', document.querySelector('.total-price'));
   const childrensCart = document.querySelectorAll('.cart__item');
-    childrensCart.forEach((kid) => kid.addEventListener('click', cartItemClickListener));
-  // getLocalStorage();
+  childrensCart.forEach((kid) => kid.addEventListener('click', cartItemClickListener));
 };
