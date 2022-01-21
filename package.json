@@ -1,0 +1,26 @@
+{
+  "name": "shopping-cart",
+  "version": "1.0.0",
+  "description": "Projeto realizado como forma de avaliação no curso de desenvolvimento web da escola de programação **Trybe**.",
+  "main": "script.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alineol/shopping-cart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alineol/shopping-cart/issues"
+  },
+  "homepage": "https://github.com/Alineol/shopping-cart#readme",
+  "devDependencies": {
+    "jest": "^27.4.7"
+  }
+}
